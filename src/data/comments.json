@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "username": "JohnDoe",
+        "rating": 5,
+        "comment": "Excellent product! Highly recommend."
+    },
+    {
+        "id": 2,
+        "username": "JaneSmith",
+        "rating": 4,
+        "comment": "Very good, but could be improved in some areas."
+    },
+    {
+        "id": 3,
+        "username": "User123",
+        "rating": 3,
+        "comment": "Average product. It's okay for the price."
+    }
+]

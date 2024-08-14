@@ -1,0 +1,126 @@
+/* Whites */
+$white: #ffffff;
+// $white-soft: #f8f8f8;
+$white-soft: #EBEDEC;
+$white-muted: #f2f2f2;
+
+/* Blacks */
+$black: #181818;
+$black-soft: #222222;
+$black-muted: #282828;
+
+/* Indigo */
+$indigo: #2c3e50;
+$primary: #741631;
+
+/* Grays */
+$gray-light: rgba(60, 60, 60, 0.66);
+$gray-divider-light: rgba(60, 60, 60, 0.12);
+$gray-divider-light-hover: rgba(60, 60, 60, 0.29);
+$gray-divider-dark: rgba(84, 84, 84, 0.48);
+$gray-divider-dark-hover: rgba(84, 84, 84, 0.65);
+
+/* Text Colors */
+$text-light-primary: $indigo;
+$text-light-secondary: $gray-light;
+$text-dark-primary: $white;
+$text-dark-secondary: rgba(235, 235, 235, 0.64);
+
+:root {
+  --white: #{$white};
+  --white-soft: #{$white-soft};
+  --white-muted: #{$white-muted};
+
+  --black: #{$black};
+  --black-soft: #{$black-soft};
+  --black-muted: #{$black-muted};
+
+  --indigo: #{$indigo};
+
+  --divider-light-1: #{$gray-divider-light-hover};
+  --divider-light-2: #{$gray-divider-light};
+  --divider-dark-1: #{$gray-divider-dark-hover};
+  --divider-dark-2: #{$gray-divider-dark};
+
+  --text-light-1: #{$text-light-primary};
+  --text-light-2: #{$text-light-secondary};
+  --text-dark-1: #{$text-dark-primary};
+  --text-dark-2: #{$text-dark-secondary};
+}
+
+/* Semantic Colors */
+:root {
+  --color-background: var(--white);
+  --color-background-soft: var(--white-soft);
+  --color-background-muted: var(--white-muted);
+
+  --color-border: var(--divider-light-2);
+  --color-border-hover: var(--divider-light-1);
+
+  --color-heading: var(--text-light-1);
+  --color-text: var(--text-light-1);
+
+  --section-gap: 160px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: var(--black);
+    --color-background-soft: var(--black-soft);
+    --color-background-muted: var(--black-muted);
+
+    --color-border: var(--divider-dark-2);
+    --color-border-hover: var(--divider-dark-1);
+
+    --color-heading: var(--text-dark-1);
+    --color-text: var(--text-dark-2);
+  }
+}
+
+@mixin baseWidth {
+  width: 70dvw;
+  transition: all 0.5s ease;
+}
+
+@mixin baseMargin {
+  margin-bottom: 2rem;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+
+  min-height: 100dvh;
+  color: var(--color-text);
+  background: var(--color-background);
+  transition: color 0.5s, background-color 0.5s;
+  line-height: 1.6;
+  font-family: Roboto, sans-serif;
+  font-size: 15px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}

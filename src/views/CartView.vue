@@ -1,0 +1,961 @@
+<template>
+    <section class="cart-section">
+
+        <div class="steps-container">
+
+            <ul class="checkout-steps">
+                <li class="step" v-bind:class="{ 'active': activeTab === 'cart' }">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Cart</div>
+                </li>
+                <li class="step" v-bind:class="{ 'active': activeTab === 'payment' }">
+                    <div class="step-number">2</div>
+                    <div class="step-label
+                ">Shipping & Payment</div>
+                </li>
+                <li class="step" v-bind:class="{ 'active': activeTab === 'result' }">
+                    <div class="step-number">3</div>
+                    <div class="step-label
+                ">Order Complete</div>
+                </li>
+            </ul>
+        </div>
+        <div class="step cart" v-if="activeTab === 'cart'">
+            <div class="if-cart-empty" v-if="cartItems.length === 0">
+                <h2>Your cart is empty</h2>
+                <RouterLink to="/products">
+                    <button class="start-shopping">Start Shopping</button>
+                </RouterLink>
+            </div>
+            <div class="cart-row">
+                <div class="cart-item" v-for="cartItem in cartItems" :key="cartItem.id">
+                    <div class="left-side-wrap">
+                        <RouterLink :to="`/product/${cartItem.id}`">
+                            <div class="item-image">
+                                <img :src="cartItem.image" :alt="cartItem.name">
+                            </div>
+                        </RouterLink>
+                        <div class="item-details">
+                            <RouterLink :to="`/product/${cartItem.id}`">
+                                <div class="item-name">{{ cartItem.name }}</div>
+                            </RouterLink>
+                            <div>
+                                <div class="item-size">Size: {{ cartItem.size }}</div>
+                                <div class="item-color">Color:
+                                    <button :style="{ backgroundColor: cartItem.color }" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="item-quantity">
+                        <button class="quantity-btn" :disabled="cartItem.quantity == 1"
+                            @click="updateQuantity(cartItem.id, cartItem.color, cartItem.size, cartItem.quantity - 1)">-</button>
+                        <span class="quantity">{{ cartItem.quantity }}</span>
+                        <button class="quantity-btn"
+                            @click="updateQuantity(cartItem.id, cartItem.color, cartItem.size, cartItem.quantity + 1)">+</button>
+                    </div>
+
+                    <div class="right-side-wrap">
+                        <div class="item-remove" @click="removeItem(cartItem.id, cartItem.color, cartItem.size)">
+                            <button class="remove-btn">
+                                <font-awesome-icon icon="fa-regular fa-trash-can" />
+                            </button>
+                        </div>
+                        <div class="item-price">$ {{ cartItem.price * cartItem.quantity }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary">
+                <div class="summary-head">
+                    <button class="add-gift-card-btn">Add Gift Card or enter a promotion code</button>
+                </div>
+                <div class="summary-bottom">
+                    <div class="summary-total">
+                        <p class="total-label">Total</p>
+                        <p class="total-price">${{ subtotal }}</p>
+                    </div>
+                    <input class="checkout-btn" @click="activeTab = 'payment'" :disabled="cartItems.length === 0"
+                        value="Checkout" type="submit" />
+                </div>
+            </div>
+        </div>
+
+        <div class="step payment" v-if="activeTab === 'payment'">
+            <div class="shipping-form">
+                <div class="delivery-address">
+                    <h3 class="delivery-address-label">Delivery Address</h3>
+                    <input type="text" id="name" name="name" placeholder="name" />
+                    <input type="text" id="surname" name="surname" placeholder="surname" />
+                    <input type="text" id="phone" name="phone" placeholder="phone" />
+                    <input type="text" id="email" name="email" placeholder="email" />
+                    <input type="text" id="country" name="country" placeholder="country" />
+                    <input type="text" id="city" name="city" placeholder="city" />
+                    <input type="text" id="address" name="address" placeholder="address" />
+                    <input type="text" id="zip" name="zip" placeholder="zip" />
+                </div>
+                <div class="delivery-options">
+                    <h3 class="delivery-options-label">Delivery Options</h3>
+                    <div class="delivery-option">
+                        <label for="standard">
+                            <input type="radio" id="standard" name="delivery" value="standard" />
+                            Standard Delivery
+                        </label>
+                        <p class="shipping-day">Estimated delivery 2-3 days</p>
+                        <p class="shipping-price">free of charge</p>
+                    </div>
+                    <div class="delivery-option">
+                        <label for="express">
+                            <input type="radio" id="express" name="delivery" value="express" />
+                            Express Delivery</label>
+                        <p class="shipping-day">Same day delivery for orders placed before
+                            12:00</p>
+                        <p class="shipping-price">$10.00</p>
+                    </div>
+                </div>
+                <div class="payment-method">
+                    <h3 class="payment-method-label">Payment Method</h3>
+                    <div class="payment-method-options">
+                        <div class="payment-option">
+                            <label for="credit-card">
+                                <input type="radio" id="credit-card" name="payment" value="credit-card" />
+                                Credit Card
+                            </label>
+                        </div>
+                        <div class="payment-option">
+
+                            <label for="paypal">
+                                <input type="radio" id="paypal" name="payment" value="paypal" />
+                                Paypal
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="terms-and-conditions">
+
+                    <label for="terms">
+                        <input type="checkbox" id="terms" name="terms" required />
+                        I accept the <a href="">terms and conditions</a>
+                    </label>
+                </div>
+            </div>
+            <div class="summary">
+                <div class="summary-head">
+                    <div class="subtotal">
+                        <p class="subtotal-label">Subtotal</p>
+                        <p class="subtotal-price">${{ subtotal }}</p>
+                    </div>
+                    <div class="shipping">
+                        <p class="shipping-label">Shipping</p>
+                        <p class="shipping-price">${{ shipping }}</p>
+                    </div>
+                </div>
+                <div class="summary-bottom">
+                    <div class="summary-total">
+                        <p class="total-label">Total</p>
+                        <p class="total-price">${{ totalPrice }}</p>
+                    </div>
+                    <input class="checkout-btn" @click="checkout" value="Checkout" type="submit" />
+                    <div class="secure-shop">
+                        <font-awesome-icon icon="lock" />
+                        <div class="wrap">
+                            <h4>Safe Shopping</h4>
+                            <p>Your purchases at Coral.com are protected by an SSL security certificate.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="step result" v-if="activeTab === 'result'">
+            <div class="order-complete">
+                <div class="order-complete-message">
+                    <font-awesome-icon icon="check-circle" class="check-circle" />
+                    <span>Your order has been placed successfully</span>
+                </div>
+                <div class="order-details">
+                    <div class="order-number">
+                        <span>Order Number:</span>
+                        <span>{{ rondomOrderNum }}</span>
+                    </div>
+                    <div class="order-date">
+                        <span>Order Date:</span>
+                        <span>{{ orderDate }}</span>
+                    </div>
+                    <div class="buttons">
+                        <RouterLink to="/products">
+                            <button class="button home">Continue Shopping</button>
+                        </RouterLink>
+                        <RouterLink to="/orders">
+                            <button class="button orders">See Orders</button>
+                        </RouterLink>
+                    </div>
+                    <div class="order-row">
+                        <div class="order-item" v-for="cartItem in latestOrder.cartItems" :key="cartItem.id">
+                            <div class="left-side-wrap">
+                                <RouterLink :to="`/product/${cartItem.id}`">
+                                    <div class="item-image">
+                                        <img :src="cartItem.image" :alt="cartItem.name">
+                                    </div>
+                                </RouterLink>
+                                <div class="item-details">
+                                    <RouterLink :to="`/product/${cartItem.id}`">
+                                        <div class="item-name">{{ cartItem.name }}</div>
+                                    </RouterLink>
+                                    <div>
+                                        <div class="item-size">Size: {{ cartItem.size }}</div>
+                                        <div class="item-color">Color:
+                                            <button :style="{ backgroundColor: cartItem.color }" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-quantity">
+                                <span class="quantity">{{ cartItem.quantity }}</span>
+                            </div>
+                            <div class="right-side-wrap">
+                                <div class="item-price">$ {{ cartItem.price * cartItem.quantity }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<script setup>
+import { computed, ref } from "vue";
+import { useCartStore } from '../stores/cart';
+
+const activeTab = ref('cart');
+
+const cartStore = useCartStore();
+const cartItems = computed(() => cartStore.cartItems);
+const orders = computed(() => cartStore.orders);
+const latestOrder = computed(() => orders.value[orders.value.length - 1]);
+
+const emptyCart = () => {
+    cartStore.emptyCart();
+};
+const rondomOrderNum = Math.floor(Math.random() * 1000000);
+
+const orderDate = new Date().toLocaleDateString();
+
+const updateQuantity = (productId, color, size, quantity) => {
+    if (quantity <= 0) {
+        cartStore.removeCartItem({ productId, color, size });
+    } else {
+        cartStore.updateCartItem({ productId, color, size, quantity });
+    }
+};
+
+const removeItem = (productId, color, size) => {
+    cartStore.removeCartItem({ productId, color, size });
+};
+
+const subtotal = computed(() => {
+    return cartItems.value.reduce((total, item) => {
+        return total + item.price * item.quantity;
+    }, 0);
+});
+
+const shipping = computed(() => {
+    return 0;
+});
+
+const totalPrice = computed(() => {
+    const productsTotal = cartItems.value.reduce((total, item) => {
+        return total + item.price * item.quantity;
+    }, 0);
+    return productsTotal + shipping.value;
+});
+
+const addToOrders = () => {
+    const order = {
+        cartItems: cartItems.value,
+        totalPrice: totalPrice.value,
+        orderNumber: rondomOrderNum,
+        orderDate: orderDate
+    };
+    cartStore.placeOrder(order);
+    activeTab.value = 'result';
+    return order;
+};
+
+const checkout = () => {
+    addToOrders();
+    activeTab.value = 'result';
+};
+
+
+</script>
+
+<style lang="scss" scoped>
+.cart-section {
+    @include baseMargin;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: stretch;
+    width: 100%;
+    min-height: 46.43dvh;
+
+    .steps-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: fit-content;
+        background-color: $white-muted;
+        padding: 1rem 0;
+        margin-bottom: 10px;
+
+        .checkout-steps {
+            @include baseWidth;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            list-style-type: none;
+            padding: 0;
+            overflow: hidden;
+
+            .step {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                float: left;
+                border: none;
+                outline: none;
+                padding: 3px 16px;
+                transition: 0.3s;
+                font-size: 17px;
+                gap: 10px;
+
+                .step-number {
+                    border: $gray-divider-dark 1px solid;
+                    border-radius: 100%;
+                    width: 25px;
+                    height: 25px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                // .step-label {}
+
+                &.active {
+                    border-bottom: $gray-divider-dark 0.5px solid;
+
+                    >* {
+                        font-weight: bold;
+                    }
+
+                }
+            }
+        }
+    }
+
+    .step.cart {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        gap: 10px;
+        // border: $black 1px solid;
+
+        .if-cart-empty {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
+
+            .start-shopping {
+                padding: 10px;
+                border-radius: 20px;
+                border: $gray-divider-dark 1px solid;
+                cursor: pointer;
+            }
+        }
+
+        .cart-row {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+
+            .cart-item {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                gap: 50px;
+                padding: 10px;
+                border: $gray-divider-light 1px solid;
+                width: 50dvw;
+                border-radius: 0.25rem;
+
+                .left-side-wrap {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 20px;
+
+                    .item-image {
+                        cursor: pointer;
+
+                        img {
+                            height: 100px;
+                        }
+                    }
+
+                    .item-details {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: start;
+                        gap: 5px;
+
+                        .item-name {
+                            font-size: 1.1em;
+                            font-weight: bold;
+                            cursor: pointer;
+                        }
+
+                        div {
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: start;
+                            align-items: center;
+                            gap: 10px;
+
+                            // .item-size {}
+
+                            .item-color {
+                                display: flex;
+                                gap: 10px;
+                                flex-wrap: wrap;
+                                justify-content: center;
+                                align-items: center;
+
+                                button {
+                                    height: 30px;
+                                    width: 30px;
+                                    border: none;
+                                    border-radius: 100%;
+
+                                    box-shadow: inset 0 0 0 3px white;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .item-quantity {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+
+                button {
+                    cursor: pointer;
+                    border: $gray-divider-light 1px solid;
+                    border-radius: 5px;
+                    font-weight: bold;
+                }
+
+                .quantity {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    font-size: 1.2em;
+                    font-weight: bold;
+                    width: 30px;
+                    height: 30px;
+
+                }
+
+                .quantity-btn {
+                    cursor: pointer;
+
+                    // &:hover {}
+
+                    // &:active {}
+
+                    // &:focus {}
+                }
+            }
+
+            .right-side-wrap {
+                display: flex;
+                flex-direction: column;
+                align-items: end;
+                justify-content: space-between;
+                height: 100px;
+                margin: 0 0 0 20px;
+
+                .item-remove {
+                    padding: 0;
+
+                    .remove-btn {
+                        border: none;
+                        cursor: pointer;
+                        padding: 0;
+
+                        &:hover {
+                            color: darkred;
+                        }
+                    }
+                }
+
+                .item-price {
+                    font-size: 1.2em;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+
+    .step.payment {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: start;
+        gap: 10px;
+
+        .shipping-form {
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: start;
+            gap: 30px;
+            border: $gray-divider-light 1px solid;
+            padding: 10px;
+
+            >* {
+                width: 100%;
+                border-bottom: $gray-divider-dark 1px dashed;
+                padding: 10px;
+            }
+
+            .delivery-address {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: start;
+                gap: 10px;
+                width: 50dvw;
+
+                .delivery-address-label {
+                    font-size: 1.2em;
+                    font-weight: bold;
+                }
+
+                input {
+                    width: 100%;
+                    padding: 10px;
+                    border: $gray-divider-dark 1px solid;
+                    border-radius: 5px;
+                }
+            }
+
+            .delivery-options {
+                display: flex;
+                flex-direction: column;
+                justify-content: start;
+                align-items: start;
+                gap: 10px;
+                width: 50dvw;
+
+                .delivery-options-label {
+                    font-size: 1.2em;
+                    font-weight: bold;
+                }
+
+                .delivery-option {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: start;
+                    gap: 10px;
+
+                    p {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: start;
+                        gap: 5px;
+                        font-style: italic;
+                        padding-left: 20px;
+                        color: $text-light-secondary;
+                    }
+                }
+            }
+
+            .payment-method {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: start;
+                gap: 10px;
+                width: 50dvw;
+
+                .payment-method-label {
+                    font-size: 1.2em;
+                    font-weight: bold;
+                }
+
+                .payment-method-options {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: start;
+                    gap: 10px;
+
+                    .payment-option {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: start;
+                        align-items: center;
+                        gap: 10px;
+                    }
+                }
+            }
+
+            .terms-and-conditions {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                border: none;
+
+                label {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 10px;
+                }
+            }
+        }
+    }
+
+    .step.result {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .order-complete {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            margin-top: 40px;
+
+            .order-complete-message {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                color: green;
+                font-size: 2em;
+
+                .check-circle {
+                    color: green;
+                    font-size: 2em;
+                }
+            }
+
+            .order-details {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                margin-top: 20px;
+
+                .order-number {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 10px;
+
+                    span {
+                        font-weight: bold;
+                    }
+                }
+
+                .order-date {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 10px;
+
+                    span {
+                        font-weight: bold;
+                    }
+                }
+
+                .buttons{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 10px;
+
+                    button{
+                        padding: 10px;
+                        border-radius: 20px;
+                        border: $gray-divider-dark 1px solid;
+                        cursor: pointer;
+                    }
+                }
+
+                .order-row {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 10px;
+                    margin-top: 20px;
+
+                    .order-item {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        align-items: center;
+                        gap: 50px;
+                        padding: 10px;
+                        border: $gray-divider-light 1px solid;
+                        width: 50dvw;
+
+
+                        .left-side-wrap {
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: center;
+                            align-items: center;
+                            gap: 20px;
+
+                            .item-image {
+                                cursor: pointer;
+
+                                img {
+                                    height: 100px;
+                                }
+                            }
+
+                            .item-details {
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: start;
+                                gap: 5px;
+
+                                .item-name {
+                                    font-size: 1.1em;
+                                    font-weight: bold;
+                                    cursor: pointer;
+                                }
+
+                                div {
+                                    display: flex;
+                                    flex-direction: row;
+                                    justify-content: start;
+                                    align-items: center;
+                                    gap: 10px;
+
+                                    // .item-size {}
+
+                                    .item-color {
+                                        display: flex;
+                                        gap: 10px;
+                                        flex-wrap: wrap;
+                                        justify-content: center;
+                                        align-items: center;
+
+                                        button {
+                                            height: 30px;
+                                            width: 30px;
+                                            border: none;
+                                            border-radius: 100%;
+
+                                            box-shadow: inset 0 0 0 3px white;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .item-quantity {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+
+                .quantity {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    font-size: 1.2em;
+                    font-weight: bold;
+                    width: 30px;
+                    height: 30px;
+                }
+            }
+
+            .right-side-wrap {
+                display: flex;
+                flex-direction: column;
+                align-items: end;
+                justify-content: center;
+                height: 100px;
+                margin: 0 0 0 20px;
+
+                .item-price {
+                    font-size: 1.2em;
+                    font-weight: bold;
+                }
+            }
+
+        }
+    }
+
+    .summary {
+        background: $white-muted;
+        border: $gray-divider-light 1px solid;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 10px;
+        min-height: 35dvh;
+        max-height: 70dvh;
+        width: 30dvw;
+
+        .summary-head {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            padding: 10px;
+
+            .add-gift-card-btn {
+                text-align: center;
+                padding: 10px;
+                white-space: nowrap;
+                cursor: pointer;
+                border-radius: 20px;
+                border: $gray-divider-dark 1px solid;
+                width: 100%;
+
+                // &:hover {}
+
+                // &:active {}
+
+                // &:focus {}
+            }
+
+            .subtotal {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                width: 90%;
+
+                // .subtotal-label {}
+
+                // .subtotal-price {}
+            }
+
+            .shipping {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                width: 90%;
+
+                // .shipping-label {}
+
+                // .shipping-price {}
+            }
+        }
+
+        .summary-bottom {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            border-top: $gray-divider-light 2px dashed;
+            padding: 10px;
+
+            .summary-total {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                width: 90%;
+
+                .total-label {
+                    font-size: 1.2em;
+                    font-weight: bold;
+                }
+
+                .total-price {
+                    font-size: 1.2em;
+                    font-weight: bold;
+                }
+            }
+
+            .checkout-btn {
+                text-align: center;
+                padding: 10px;
+                white-space: nowrap;
+                cursor: pointer;
+                border-radius: 20px;
+                border: $gray-divider-dark 1px solid;
+                width: 100%;
+
+                // &:hover {}
+
+                // &:active {}
+
+                // &:focus {}
+            }
+
+            .secure-shop {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+
+                // font-awesome-icon {}
+            }
+        }
+    }
+}
+</style>

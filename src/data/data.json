@@ -1,0 +1,158 @@
+{
+    "collections": [
+        {
+            "id": 1,
+            "name": "Collection 1",
+            "image": "../src/assets/img/collection (1).png"
+        },
+        {
+            "id": 2,
+            "name": "Collection 2",
+            "image": "../src/assets/img/collection (2).png"
+        },
+        {
+            "id": 3,
+            "name": "Collection 3",
+            "image": "../src/assets/img/collection (3).png"
+        },
+        {
+            "id": 4,
+            "name": "Collection 4",
+            "image": "../src/assets/img/collection (4).png"
+        },
+        {
+            "id": 5,
+            "name": "Collection 5",
+            "image": "../src/assets/img/collection (5).png"
+        }
+    ],
+    "products": [
+        {
+            "id": 1,
+            "name": "Adicolor Classics Joggers",
+            "image": "../src/assets/img/product (1).png",
+            "price": 100,
+            "discount": 0,
+            "bestSeller": true,
+            "type": "Pants",
+            "badge": "",
+            "sizes": ["S", "M", "L", "XL"],
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nibh elit, sollicitudin id posuere eu, ultrices id nibh. Nullam quis justo eget sapien suscipit finibus quis ut erat. Praesent fringilla purus ut erat venenatis aliquet. Nam mollis vulputate purus id tincidunt. Fusce nec diam ut orci tempor bibendum.",
+            "colors": ["#ecece4", "#ed5e4b", "#743931", "#959abb", "#c3dac6", "#576163"]
+        },
+        {
+            "id": 2,
+            "name": "Nike Sportswear Futura Luxe",
+            "image": "../src/assets/img/product (2).png",
+            "price": 200,
+            "discount": 0,
+            "bestSeller": true,
+            "type": "Bag",
+            "badge": "",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nibh elit, sollicitudin id posuere eu, ultrices id nibh. Nullam quis justo eget sapien suscipit finibus quis ut erat. Praesent fringilla purus ut erat venenatis aliquet. Nam mollis vulputate purus id tincidunt. Fusce nec diam ut orci tempor bibendum.",
+            "colors": ["#ecece4", "#ed5e4b", "#743931", "#959abb", "#c3dac6", "#576163"]
+        },
+        {
+            "id": 3,
+            "name": "Geometric print Scarf",
+            "image": "../src/assets/img/product (3).png",
+            "price": 300,
+            "discount": 0,
+            "bestSeller": true,
+            "type": "Scarf",
+            "badge": "",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nibh elit, sollicitudin id posuere eu, ultrices id nibh. Nullam quis justo eget sapien suscipit finibus quis ut erat. Praesent fringilla purus ut erat venenatis aliquet. Nam mollis vulputate purus id tincidunt. Fusce nec diam ut orci tempor bibendum.",
+            "colors": ["#ecece4", "#ed5e4b", "#743931", "#959abb", "#c3dac6", "#576163"]
+        },
+        {
+            "id": 4,
+            "name": "Yellow Reserved Hoodie",
+            "image": "../src/assets/img/product (4).png",
+            "price": 400,
+            "discount": 10,
+            "bestSeller": true,
+            "type": "Hoodie",
+            "badge": "sale",
+            "sizes": ["S", "M", "L", "XL"],
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nibh elit, sollicitudin id posuere eu, ultrices id nibh. Nullam quis justo eget sapien suscipit finibus quis ut erat. Praesent fringilla purus ut erat venenatis aliquet. Nam mollis vulputate purus id tincidunt. Fusce nec diam ut orci tempor bibendum.",
+            "colors": ["#ecece4", "#ed5e4b", "#743931", "#959abb", "#c3dac6", "#576163"]
+        },
+        {
+            "id": 5,
+            "name": "Basic Dress Green",
+            "image": "../src/assets/img/product (5).png",
+            "price": 500,
+            "discount": 0,
+            "bestSeller": false,
+            "type": "Dress",
+            "badge": "hot",
+            "sizes": ["S", "M", "L", "XL"],
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nibh elit, sollicitudin id posuere eu, ultrices id nibh. Nullam quis justo eget sapien suscipit finibus quis ut erat. Praesent fringilla purus ut erat venenatis aliquet. Nam mollis vulputate purus id tincidunt. Fusce nec diam ut orci tempor bibendum.",
+            "colors": ["#ecece4", "#ed5e4b", "#743931", "#959abb", "#c3dac6", "#576163"]
+        },
+        {
+            "id": 6,
+            "name": "Nike Air Zoom Pegasus",
+            "image": "../src/assets/img/product (6).png",
+            "price": 600,
+            "discount": 20,
+            "bestSeller": false,
+            "type": "Shoe",
+            "badge": "sale",
+            "sizes": ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"],
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nibh elit, sollicitudin id posuere eu, ultrices id nibh. Nullam quis justo eget sapien suscipit finibus quis ut erat. Praesent fringilla purus ut erat venenatis aliquet. Nam mollis vulputate purus id tincidunt. Fusce nec diam ut orci tempor bibendum.",
+            "colors": ["#ecece4", "#ed5e4b", "#743931", "#959abb", "#c3dac6", "#576163"]
+        },
+        {
+            "id": 7,
+            "name": "Nike Repel Miler",
+            "image": "../src/assets/img/product (7).png",
+            "price": 700,
+            "discount": 0,
+            "bestSeller": false,
+            "type": "Hoodie",
+            "badge": "",
+            "sizes": ["S", "M", "L", "XL"],
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nibh elit, sollicitudin id posuere eu, ultrices id nibh. Nullam quis justo eget sapien suscipit finibus quis ut erat. Praesent fringilla purus ut erat venenatis aliquet. Nam mollis vulputate purus id tincidunt. Fusce nec diam ut orci tempor bibendum.",
+            "colors": ["#ecece4", "#ed5e4b", "#743931", "#959abb", "#c3dac6", "#576163"]
+        },
+        {
+            "id": 8,
+            "name": "Nike Sportswear Futura Luxe",
+            "image": "../src/assets/img/product (8).png",
+            "price": 800,
+            "discount": 0,
+            "bestSeller": false,
+            "type": "Glasses",
+            "badge": "",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nibh elit, sollicitudin id posuere eu, ultrices id nibh. Nullam quis justo eget sapien suscipit finibus quis ut erat. Praesent fringilla purus ut erat venenatis aliquet. Nam mollis vulputate purus id tincidunt. Fusce nec diam ut orci tempor bibendum.",
+            "colors": ["#ecece4", "#ed5e4b", "#743931", "#959abb", "#c3dac6", "#576163"]
+        }
+    ],
+    "instagram": [
+        {
+            "id": 1,
+            "image": "../src/assets/img/instagram (1).png"
+        },
+        {
+            "id": 2,
+            "image": "../src/assets/img/instagram (2).png"
+        },
+        {
+            "id": 3,
+            "image": "../src/assets/img/instagram (3).png"
+        },
+        {
+            "id": 4,
+            "image": "../src/assets/img/instagram (4).png"
+        },
+        {
+            "id": 5,
+            "image": "../src/assets/img/instagram (5).png"
+        },
+        {
+            "id": 6,
+            "image": "../src/assets/img/instagram (6).png"
+        }
+    ]
+}
