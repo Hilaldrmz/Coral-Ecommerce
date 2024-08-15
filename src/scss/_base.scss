@@ -12,6 +12,7 @@ $black-muted: #282828;
 /* Indigo */
 $indigo: #2c3e50;
 $primary: #741631;
+$success: #53a653;
 
 /* Grays */
 $gray-light: rgba(60, 60, 60, 0.66);
@@ -84,6 +85,15 @@ $text-dark-secondary: rgba(235, 235, 235, 0.64);
 
 @mixin baseMargin {
   margin-bottom: 2rem;
+}
+
+@mixin mainContainerHeight {
+  $header-footer-height: 457.453px; // Header ve footer yüksekliği
+  $base-margin: 32px ; // baseMargin'deki margin değeri
+  
+  min-height: calc(100dvh - #{$header-footer-height + $base-margin}); 
+  height: auto;
+  transition: all 0.5s ease;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');

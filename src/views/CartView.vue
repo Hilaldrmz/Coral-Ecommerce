@@ -27,7 +27,7 @@
                     <button class="start-shopping">Start Shopping</button>
                 </RouterLink>
             </div>
-            <div class="cart-row">
+            <div class="cart-row" v-else>
                 <div class="cart-item" v-for="cartItem in cartItems" :key="cartItem.id">
                     <div class="left-side-wrap">
                         <RouterLink :to="`/product/${cartItem.id}`">
@@ -68,7 +68,7 @@
                 </div>
             </div>
 
-            <div class="summary">
+            <div class="summary zig-zag-top">
                 <div class="summary-head">
                     <button class="add-gift-card-btn">Add Gift Card or enter a promotion code</button>
                 </div>
@@ -141,7 +141,7 @@
                     </label>
                 </div>
             </div>
-            <div class="summary">
+            <div class="summary zig-zag-top">
                 <div class="summary-head">
                     <div class="subtotal">
                         <p class="subtotal-label">Subtotal</p>
@@ -296,12 +296,12 @@ const checkout = () => {
 <style lang="scss" scoped>
 .cart-section {
     @include baseMargin;
+    @include mainContainerHeight;
     display: flex;
     flex-direction: column;
     justify-content: start;
     align-items: stretch;
     width: 100%;
-    min-height: 46.43dvh;
 
     .steps-container {
         display: flex;
@@ -312,7 +312,7 @@ const checkout = () => {
         height: fit-content;
         background-color: $white-muted;
         padding: 1rem 0;
-        margin-bottom: 10px;
+        margin-bottom: 30px;
 
         .checkout-steps {
             @include baseWidth;
@@ -364,15 +364,16 @@ const checkout = () => {
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
-        align-items: center;
+        align-items: start;
         gap: 10px;
-        // border: $black 1px solid;
 
         .if-cart-empty {
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
             gap: 10px;
+            width: 50dvw;
 
             .start-shopping {
                 padding: 10px;
@@ -538,14 +539,16 @@ const checkout = () => {
             flex-direction: column;
             justify-content: center;
             align-items: start;
-            gap: 30px;
             border: $gray-divider-light 1px solid;
-            padding: 10px;
+            padding: 30px;
+            background-color: $white-muted;
+            width: 50dvw;
+            border-radius: 0.25rem;
 
             >* {
                 width: 100%;
                 border-bottom: $gray-divider-dark 1px dashed;
-                padding: 10px;
+                padding: 20px;
             }
 
             .delivery-address {
@@ -554,7 +557,6 @@ const checkout = () => {
                 justify-content: center;
                 align-items: start;
                 gap: 10px;
-                width: 50dvw;
 
                 .delivery-address-label {
                     font-size: 1.2em;
@@ -571,13 +573,14 @@ const checkout = () => {
 
             .delivery-options {
                 display: flex;
-                flex-direction: column;
+                flex-direction: row;
+                flex-wrap: wrap;
                 justify-content: start;
                 align-items: start;
                 gap: 10px;
-                width: 50dvw;
 
                 .delivery-options-label {
+                    width: 100%;
                     font-size: 1.2em;
                     font-weight: bold;
                 }
@@ -599,6 +602,10 @@ const checkout = () => {
                         color: $text-light-secondary;
                     }
                 }
+
+                .delivery-option+.delivery-option {
+                    margin-left: 100px;
+                }
             }
 
             .payment-method {
@@ -607,7 +614,6 @@ const checkout = () => {
                 justify-content: center;
                 align-items: start;
                 gap: 10px;
-                width: 50dvw;
 
                 .payment-method-label {
                     font-size: 1.2em;
@@ -644,7 +650,15 @@ const checkout = () => {
                     flex-direction: row;
                     justify-content: center;
                     align-items: center;
-                    gap: 10px;
+                    
+                    input{
+                        margin-right: 10px;
+                        
+                    }
+
+                    a {
+                        font-weight: bold;
+                    }
                 }
             }
         }
@@ -712,14 +726,14 @@ const checkout = () => {
                     }
                 }
 
-                .buttons{
+                .buttons {
                     display: flex;
                     flex-direction: row;
                     justify-content: center;
                     align-items: center;
                     gap: 10px;
 
-                    button{
+                    button {
                         padding: 10px;
                         border-radius: 20px;
                         border: $gray-divider-dark 1px solid;
@@ -844,7 +858,9 @@ const checkout = () => {
 
     .summary {
         background: $white-muted;
-        border: $gray-divider-light 1px solid;
+        // border: $gray-divider-light 1px solid;
+        outline: 1px solid $gray-divider-light;
+        outline-offset: -1px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -853,6 +869,28 @@ const checkout = () => {
         min-height: 35dvh;
         max-height: 70dvh;
         width: 30dvw;
+        border-radius: 0 0 0.25rem 0.25rem;
+
+        &.zig-zag-top {
+            &:before {
+                background:
+                    linear-gradient(-45deg, $white-muted 16px, transparent 0),
+                    linear-gradient(45deg, $white-muted 16px, rgba(60, 60, 60, 0.16) 17px, transparent 0);
+                background-position: left top;
+                background-repeat: repeat-x;
+                background-size: 13px 24px;
+                content: " ";
+                display: block;
+                height: 10px;
+                width: 30dvw;
+                position: relative;
+                margin-left: -10px;
+                bottom: 18px;
+                left: 0;
+                border-left: 1px $gray-divider-light solid;
+                border-right: 1px $gray-divider-light solid;
+            }
+        }
 
         .summary-head {
             display: flex;
@@ -861,6 +899,7 @@ const checkout = () => {
             align-items: center;
             gap: 15px;
             padding: 10px;
+            margin-top: -70px;
 
             .add-gift-card-btn {
                 text-align: center;
@@ -870,12 +909,6 @@ const checkout = () => {
                 border-radius: 20px;
                 border: $gray-divider-dark 1px solid;
                 width: 100%;
-
-                // &:hover {}
-
-                // &:active {}
-
-                // &:focus {}
             }
 
             .subtotal {
@@ -884,10 +917,7 @@ const checkout = () => {
                 justify-content: space-between;
                 align-items: center;
                 width: 90%;
-
-                // .subtotal-label {}
-
-                // .subtotal-price {}
+                padding-top: 30px;
             }
 
             .shipping {
@@ -896,10 +926,6 @@ const checkout = () => {
                 justify-content: space-between;
                 align-items: center;
                 width: 90%;
-
-                // .shipping-label {}
-
-                // .shipping-price {}
             }
         }
 

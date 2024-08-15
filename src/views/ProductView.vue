@@ -54,7 +54,8 @@
                             ${{
         discountedPrice(selectedProduct) }}</p>
                     </div>
-                    <button class="add-to-bag" @click="addToCart">Add To Bag</button>
+                    <button class="add-to-bag" :class="{ 'success': isAddedToCart }" @click="addToCart">{{ isAddedToCart
+                        ? 'Added' : 'Add to Bag' }}</button>
                 </div>
             </div>
         </div>
@@ -96,6 +97,7 @@ const discountedPrice = (product) => {
 const selectedSize = ref('');
 const selectedColor = ref('');
 const comments = ref([]);
+const isAddedToCart = ref(false);
 
 const addToCart = () => {
     // if (!selectedSize.value) {
@@ -117,7 +119,12 @@ const addToCart = () => {
         quantity: 1
     };
     cartStore.addToCart(productToAdd);
+    isAddedToCart.value = true;
     console.log(`Product added to bag: ${selectedProduct.value.name}, Size: ${selectedSize.value}, Color: ${selectedColor.value}`);
+
+    setTimeout(() => {
+        isAddedToCart.value = false;
+    }, 3000);
 };
 
 onMounted(() => {
@@ -146,7 +153,7 @@ onMounted(() => {
         transition: all 0.5 ease;
 
         .product-img {
-            height: 87dvh;
+            height: calc(100vh - 120px); // 100vh - header height
         }
 
         .right-section {
@@ -307,6 +314,7 @@ onMounted(() => {
             width: 100%;
             background: $white-soft;
             margin: 0;
+            z-index: 1;
 
             .price-wrap {
                 display: flex;
@@ -341,17 +349,32 @@ onMounted(() => {
                 height: 100%;
                 font-size: 1cqi;
 
-                &:hover {
-                    background: $primary;
+                position: relative;
+                overflow: hidden;
+                transition: color 0.3s ease;
+
+
+                &::before,
+                &::after {
+                    content: '';
+                    position: relative;
+                    top: 0;
+                    left: 0;
+                    height: 100%;
+                    width: 100%;
+                    transition: all 0.25s ease;
                 }
 
                 &:active {
                     transform: translateY(3px);
-                    
                 }
 
-                &:focus {}
-
+                &.success {
+                    background-image: linear-gradient(to right, $success 50%, transparent 50%);
+                    background-size: 200% 100%;
+                    animation: slideInBackground 3s forwards;
+                    background-position: 100%;
+                }
             }
         }
     }
@@ -391,10 +414,24 @@ onMounted(() => {
             }
         }
     }
-}
 
+}
 
 .also-like {
     margin: 5rem 0;
+}
+
+@keyframes slideInBackground {
+    0% {
+        background-position: 100%;
+    }
+
+    50% {
+        background-position: 0%;
+    }
+
+    100% {
+        background-position: 100%;
+    }
 }
 </style>

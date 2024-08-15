@@ -8,21 +8,22 @@ import ThemeToggle from "./components/ThemeToggle.vue";
 </script>
 
 <template>
-  <div class="main">
+  <main>
     <Header />
     <RouterView />
     <!-- <ThemeToggle /> -->
     <Footer />
-  </div>
+  </main>
 </template>
 
 <style lang="scss" scoped>
-.main {
+main {
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: center;
   width: 100dvw;
+  min-height: 100dvh;
   background-color: $white;
 }
 </style>

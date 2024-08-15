@@ -75,6 +75,7 @@
     border-top: $gray-divider-light 1px solid;
     width: 100%;
 
+
     .footer-container {
         @include baseWidth;
         display: flex;

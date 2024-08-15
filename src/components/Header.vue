@@ -128,6 +128,7 @@ header {
     justify-content: center;
     align-items: center;
     width: 100%;
+    height: 120px;
     background-color: $white-soft;
     padding: 1rem 0;
 

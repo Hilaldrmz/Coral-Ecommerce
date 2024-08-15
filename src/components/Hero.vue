@@ -5,10 +5,12 @@
                 <h1>Collections</h1>
                 <p>You can explore ans shop many different collection<br>
                     from various barands here.</p>
-                <button>
-                    <font-awesome-icon icon="bag-shopping" />
-                    Shop Now
-                </button>
+                <Router-link to="/products">
+                    <button>
+                        <font-awesome-icon icon="bag-shopping" />
+                        Shop Now
+                    </button>
+                </Router-link>
             </div>
             <div class="img-section">
                 <img src="../assets/hero-img.png" alt="">
@@ -73,6 +75,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
                 font-size: 16px;
                 border-radius: 0.25rem;
                 border: none;
+                cursor: pointer;
             }
         }
 

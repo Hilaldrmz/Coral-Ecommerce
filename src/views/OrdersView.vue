@@ -1,5 +1,9 @@
 <template>
-    <section class="orders">
+    <div class="is-that-empty" v-if="orders.length === 0">
+        <p>No orders yet.</p>
+    </div>
+
+    <section class="orders" v-else>
         <div class="order-row" v-for="order in orders" :key="order.orderNumber">
             <div class="order-details">
                 <div class="order-date">
@@ -52,13 +56,29 @@ const orders = computed(() => cartStore.orders);
 
 
 <style lang="scss" scoped>
+.is-that-empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100dvw;
+    @include baseMargin;
+    @include mainContainerHeight;
+
+    p {
+        font-size: 1cqi;
+        font-style: italic;
+    }
+}
+
 .orders {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     @include baseMargin;
-    margin-bottom: 50px;
+    @include mainContainerHeight;
 
     .order-row {
         @include baseWidth;
