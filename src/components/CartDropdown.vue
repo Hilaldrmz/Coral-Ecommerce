@@ -8,7 +8,7 @@
                 <div class="left-side-wrap">
                     <RouterLink :to="`/product/${cartItem.id}`">
                         <div class="item-image">
-                            <img :src="cartItem.image" :alt="cartItem.name">
+                            <img :src="getImagePath(cartItem.image)" :alt="cartItem.name">
                         </div>
                     </RouterLink>
                     <div class="item-details">
@@ -49,6 +49,16 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useCartStore } from '../stores/cart';
+
+function getImagePath(imagePath) {
+    const baseURL = import.meta.env.BASE_URL;
+
+    if (import.meta.env.PROD !== true) {
+        return imagePath;
+    } else {
+        return baseURL + imagePath;
+    }
+}
 
 const cartStore = useCartStore();
 const cartItems = computed(() => cartStore.cartItems);
