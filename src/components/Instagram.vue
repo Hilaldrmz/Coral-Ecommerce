@@ -4,7 +4,7 @@
 
         <div class="posts">
             <div v-for="post in instagram" :key="post.id" class="post">
-                <img :src="post.image" alt="">
+                <img :src="getImagePath(post.image)" alt="">
             </div>
         </div>
 
@@ -25,7 +25,15 @@ import data from "../data/data.json";
 
 const instagram = ref(data.instagram);
 
-
+function getImagePath(imagePath) {
+    const baseURL = import.meta.env.BASE_URL;
+    
+    if (import.meta.env.PROD !== true) {
+        return imagePath;
+    } else {
+        return baseURL + imagePath;
+    }
+}
 </script>
 
 <style lang="scss" scoped>

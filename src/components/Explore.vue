@@ -6,12 +6,12 @@
                 <span>Explore new and popular styles</span>
             </div>
             <div v-if="collections.length > 0" class="collection single">
-                <img :src="collections[0].image" alt="" class="big" />
+                <img :src="getImagePath(collections[0].image)" alt="" class="big" />
             </div>
             <div class="multi-collection-section">
                 <template v-for="(item, index) in collections">
                     <div v-if="index !== 0" :key="item.id" class="collection multi">
-                        <img :src="item.image" alt="" class="small" />
+                        <img :src="getImagePath(item.image)" alt="" class="small" />
                     </div>
                 </template>
             </div>
@@ -24,11 +24,22 @@
 import { ref, onMounted } from "vue";
 import data from "../data/data.json";
 
+function getImagePath(imagePath) {
+    const baseURL = import.meta.env.BASE_URL;
+
+    if (import.meta.env.PROD !== true) {
+        return imagePath;
+    } else {
+        return baseURL + imagePath;
+    }
+}
+
 const collections = ref([]);
 
 onMounted(() => {
     collections.value = data.collections.filter(item => item.image);
 });
+
 
 </script>
 

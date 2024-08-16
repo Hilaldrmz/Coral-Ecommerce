@@ -25,7 +25,7 @@
                 <div class="badge-wrapper">
                     <span class="badge" :class="product.badge">{{ product.badge }}</span>
                 </div>
-                <img :src="product.image" alt="product.name" />
+                <img :src="getImagePath(product.image)" alt="product.name" />
                 <div class="product-description">
                     <h3>{{ product.name }}</h3>
                     <div class="price-wrap">
@@ -48,6 +48,16 @@ import data from "../data/data.json";
 import { useRouter } from "vue-router";
 
 const products = ref(data.products);
+
+function getImagePath(imagePath) {
+    const baseURL = import.meta.env.BASE_URL;
+
+    if (import.meta.env.PROD !== true) {
+        return imagePath;
+    } else {
+        return baseURL + imagePath;
+    }
+}
 
 const discountedPrice = (product) => {
     if (product.discount > 0) {

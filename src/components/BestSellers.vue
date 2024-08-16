@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import { ref, defineProps, computed } from "vue";
+import { ref, computed } from "vue";
 import { RouterLink, useRouter } from "vue-router";
 import data from "../data/data.json";
 
