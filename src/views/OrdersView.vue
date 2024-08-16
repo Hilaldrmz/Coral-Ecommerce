@@ -20,7 +20,7 @@
                 <div class="left-side-wrap">
                     <RouterLink :to="`/product/${cartItem.id}`">
                         <div class="item-image">
-                            <img :src="cartItem.image" :alt="cartItem.name">
+                            <img :src="getImagePath(cartItem.image)" :alt="cartItem.name">
                         </div>
                     </RouterLink>
                     <div class="item-details">
@@ -52,6 +52,18 @@ import { useCartStore } from '../stores/cart';
 
 const cartStore = useCartStore();
 const orders = computed(() => cartStore.orders);
+
+
+function getImagePath(imagePath) {
+    const baseURL = import.meta.env.BASE_URL;
+
+    if (import.meta.env.PROD !== true) {
+        return imagePath;
+    } else {
+        return baseURL + imagePath;
+    }
+}
+
 </script>
 
 

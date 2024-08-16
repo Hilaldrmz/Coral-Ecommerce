@@ -5,7 +5,7 @@
         </button>
 
         <div class="product">
-            <img class="product-img" :src="selectedProduct.image" :alt="selectedProduct.name" />
+            <img class="product-img" :src="getImagePath(selectedProduct.image)" :alt="selectedProduct.name" />
 
             <div class="right-section">
                 <div class="top-section">
@@ -70,6 +70,16 @@ import { useCartStore } from '../stores/cart';
 import data from "../data/data.json";
 import commentsData from "../data/comments.json";
 import BestSellers from "../components/BestSellers.vue";
+
+function getImagePath(imagePath) {
+    const baseURL = import.meta.env.BASE_URL;
+
+    if (import.meta.env.PROD !== true) {
+        return imagePath;
+    } else {
+        return baseURL + imagePath;
+    }
+}
 
 const route = useRoute();
 const router = useRouter();
