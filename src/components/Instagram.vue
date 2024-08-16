@@ -4,7 +4,7 @@
 
         <div class="posts">
             <div v-for="post in instagram" :key="post.id" class="post">
-                <img :src="getImagePath(post.image)" alt="">
+                <img :src="post.image" alt="">
             </div>
         </div>
 
@@ -14,7 +14,7 @@
             <label for="email" class="email-label">
                 <input name="email" id="email" type="email" placeholder="Email" required />
             </label>
-            <input type="submit" value="Submit" id="submit-btn" />
+                <input type="submit" value="Submit" id="submit-btn" />
         </form>
     </section>
 </template>
@@ -23,12 +23,8 @@
 import { ref } from "vue";
 import data from "../data/data.json";
 
-const baseURL = import.meta.env.BASE_URL;
-
-function getImagePath(imagePath) {
-    return baseURL + imagePath;
-}
 const instagram = ref(data.instagram);
+
 
 </script>
 
@@ -44,10 +40,10 @@ const instagram = ref(data.instagram);
     width: 100%;
     transition: all 0.5s ease;
 
-    @media screen and (max-width: 1840px) {
-        transform: scale(0.8);
-        width: 130%;
-    }
+@media screen and (max-width: 1840px) {
+    transform: scale(0.8);
+    width: 130%;
+}
 
     .posts {
         @include baseWidth;
@@ -113,14 +109,14 @@ const instagram = ref(data.instagram);
             }
         }
 
-        #submit-btn {
-            width: 91px;
-            height: 32px;
-            background: transparent;
-            border: none;
-            border-bottom: $black-muted 1px solid;
-            cursor: pointer;
-        }
+            #submit-btn {
+                width: 91px;
+                height: 32px;
+                background: transparent;
+                border: none;
+                border-bottom: $black-muted 1px solid;
+                cursor: pointer;
+            }
 
     }
 }

@@ -3,34 +3,34 @@
         {
             "id": 1,
             "name": "Collection 1",
-            "image": "../src/assets/img/collection (1).png"
+            "image": "/img/collection-1.png"
         },
         {
             "id": 2,
             "name": "Collection 2",
-            "image": "../src/assets/img/collection (2).png"
+            "image": "/img/collection-2.png"
         },
         {
             "id": 3,
             "name": "Collection 3",
-            "image": "../src/assets/img/collection (3).png"
+            "image": "/img/collection-3.png"
         },
         {
             "id": 4,
             "name": "Collection 4",
-            "image": "../src/assets/img/collection (4).png"
+            "image": "/img/collection-4.png"
         },
         {
             "id": 5,
             "name": "Collection 5",
-            "image": "../src/assets/img/collection (5).png"
+            "image": "/img/collection-5.png"
         }
     ],
     "products": [
         {
             "id": 1,
             "name": "Adicolor Classics Joggers",
-            "image": "../src/assets/img/product (1).png",
+            "image": "/img/product-1.png",
             "price": 100,
             "discount": 0,
             "bestSeller": true,
@@ -43,7 +43,7 @@
         {
             "id": 2,
             "name": "Nike Sportswear Futura Luxe",
-            "image": "../src/assets/img/product (2).png",
+            "image": "/img/product-2.png",
             "price": 200,
             "discount": 0,
             "bestSeller": true,
@@ -55,7 +55,7 @@
         {
             "id": 3,
             "name": "Geometric print Scarf",
-            "image": "../src/assets/img/product (3).png",
+            "image": "/img/product-3.png",
             "price": 300,
             "discount": 0,
             "bestSeller": true,
@@ -67,7 +67,7 @@
         {
             "id": 4,
             "name": "Yellow Reserved Hoodie",
-            "image": "../src/assets/img/product (4).png",
+            "image": "/img/product-4.png",
             "price": 400,
             "discount": 10,
             "bestSeller": true,
@@ -80,7 +80,7 @@
         {
             "id": 5,
             "name": "Basic Dress Green",
-            "image": "../src/assets/img/product (5).png",
+            "image": "/img/product-5.png",
             "price": 500,
             "discount": 0,
             "bestSeller": false,
@@ -93,7 +93,7 @@
         {
             "id": 6,
             "name": "Nike Air Zoom Pegasus",
-            "image": "../src/assets/img/product (6).png",
+            "image": "/img/product-6.png",
             "price": 600,
             "discount": 20,
             "bestSeller": false,
@@ -106,7 +106,7 @@
         {
             "id": 7,
             "name": "Nike Repel Miler",
-            "image": "../src/assets/img/product (7).png",
+            "image": "/img/product-7.png",
             "price": 700,
             "discount": 0,
             "bestSeller": false,
@@ -119,7 +119,7 @@
         {
             "id": 8,
             "name": "Nike Sportswear Futura Luxe",
-            "image": "../src/assets/img/product (8).png",
+            "image": "/img/product-8.png",
             "price": 800,
             "discount": 0,
             "bestSeller": false,
@@ -132,27 +132,27 @@
     "instagram": [
         {
             "id": 1,
-            "image": "../src/assets/img/instagram (1).png"
+            "image": "/img/instagram-1.png"
         },
         {
             "id": 2,
-            "image": "../src/assets/img/instagram (2).png"
+            "image": "/img/instagram-2.png"
         },
         {
             "id": 3,
-            "image": "../src/assets/img/instagram (3).png"
+            "image": "/img/instagram-3.png"
         },
         {
             "id": 4,
-            "image": "../src/assets/img/instagram (4).png"
+            "image": "/img/instagram-4.png"
         },
         {
             "id": 5,
-            "image": "../src/assets/img/instagram (5).png"
+            "image": "/img/instagram-5.png"
         },
         {
             "id": 6,
-            "image": "../src/assets/img/instagram (6).png"
+            "image": "/img/instagram-6.png"
         }
     ]
 }
