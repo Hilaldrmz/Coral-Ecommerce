@@ -14,7 +14,7 @@
                 </ul>
             </div>
             <div class="suggested-products">
-                <BestSellers message="Top Products" :scale="0.5" display="none" titleSize="40px" />
+                <ProductCard message="Top Products" :scale="0.5" :titleSize="'40px'" onlyBestSeller="true" />
             </div>
         </div>
     </div>
@@ -22,14 +22,14 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import BestSellers from './BestSellers.vue';
+import ProductCard from './common/ProductCard.vue';
 
 const searchActive = ref(false);
 
 onMounted(() => {
     setTimeout(() => {
         searchActive.value = true;
-        
+
     }, 0);
 });
 
@@ -46,7 +46,6 @@ onMounted(() => {
     z-index: 10000;
     width: 70dvw;
     background-color: transparent;
-
 
     input {
         width: 100%;
@@ -89,6 +88,9 @@ onMounted(() => {
 
         >* {
             white-space: nowrap;
+
+            border: red solid 1px;
+
         }
 
         .search-suggestions {
@@ -130,6 +132,7 @@ onMounted(() => {
             justify-content: center;
             align-items: center;
             width: 50.5%;
+            width: fit-content;
             height: 354px;
         }
     }

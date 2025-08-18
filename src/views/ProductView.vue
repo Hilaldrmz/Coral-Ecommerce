@@ -48,19 +48,19 @@
                 <div class="bottom-section">
                     <div class="price-wrap">
                         <p class="price orj-price" :class="{ 'discount-applied': selectedProduct.discount > 0 }"> ${{
-        selectedProduct.price }}</p>
+                            selectedProduct.price }}</p>
                         <p class="price discounted-price"
                             v-if="selectedProduct.price !== discountedPrice(selectedProduct)">
                             ${{
-        discountedPrice(selectedProduct) }}</p>
+                                discountedPrice(selectedProduct) }}</p>
                     </div>
-                    <button class="add-to-bag" :class="{ 'success': isAddedToCart }" @click="addToCart">{{ isAddedToCart
-                        ? 'Added' : 'Add to Bag' }}</button>
+                    <Button :class="'add-to-bag'" :success="isAddedToCart"
+                        :label="isAddedToCart ? 'Added' : 'Add to Bag'" :icon="'bag-shopping'" @click="addToCart" />
                 </div>
             </div>
         </div>
     </section>
-    <BestSellers message="You Might Also Like" class="also-like" />
+    <Products message="You Might Also Like" class="also-like" />
 </template>
 
 <script setup>
@@ -69,7 +69,8 @@ import { useRoute, useRouter } from "vue-router";
 import { useCartStore } from '../stores/cart';
 import data from "../data/data.json";
 import commentsData from "../data/comments.json";
-import BestSellers from "../components/BestSellers.vue";
+import Button from '../components/common/Buttons.vue';
+import Products from '@/components/Products.vue';
 
 function getImagePath(imagePath) {
     const baseURL = import.meta.env.BASE_URL;
@@ -110,10 +111,6 @@ const comments = ref([]);
 const isAddedToCart = ref(false);
 
 const addToCart = () => {
-    // if (!selectedSize.value) {
-    //     alert('Please select a size.');
-    //     return;
-    // }
     if (!selectedColor.value) {
         alert('Please select a color.');
         return;

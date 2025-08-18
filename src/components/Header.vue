@@ -1,11 +1,7 @@
 <template>
     <header>
         <div class="header-content">
-            <div class="search-wrap" @click="searchActive = !searchActive" >
-                <font-awesome-icon icon="search" class="search" />
-                <Search v-if="searchActive" ref="searchComponent" />
-            </div>
-            <RouterLink to="/">
+            <RouterLink to="/" class="logo-router">
                 <Logo class="logo"></Logo>
             </RouterLink>
             <div class="user">
@@ -34,22 +30,6 @@
             </div>
         </div>
         <hr>
-        <nav>
-            <ul>
-                <RouterLink to="/products">
-                    <li>Accessories</li>
-                </RouterLink>
-                <RouterLink to="/products">
-                    <li>Clothing</li>
-                </RouterLink>
-                <RouterLink to="/products">
-                    <li>Home & Living</li>
-                </RouterLink>
-                <RouterLink to="/products">
-                    <li>Wedding & Party</li>
-                </RouterLink>
-            </ul>
-        </nav>
     </header>
 </template>
 
@@ -59,7 +39,6 @@ import { useCartStore } from '../stores/cart';
 import { RouterLink } from "vue-router";
 import Logo from '../components/Logo.vue'
 import CartDropdown from '../components/CartDropdown.vue'
-import Search from '../components/Search.vue'
 
 const cartStore = useCartStore();
 const cartItemCount = computed(() => cartStore.cartItemCount)
@@ -134,27 +113,21 @@ header {
 
 
     .header-content {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
         align-items: center;
+        width: 100%;
 
         @include baseWidth;
 
-        .search-wrap {
-            display: flex;
-            justify-content: start;
-            align-items: center;
-            gap: 10px;
-            width: 127px;
+        .logo-router {
+            grid-column: 2;
+            justify-self: center;
+            align-self: center;
 
-            .search {
+            .logo {
                 cursor: pointer;
             }
-        }
-
-        .logo {
-            cursor: pointer;
         }
 
         .user {
@@ -165,6 +138,8 @@ header {
             width: 127px;
             gap: 40px;
             cursor: pointer;
+            grid-column: 3;
+            justify-self: end;
 
             .user-items {
                 display: flex;
@@ -236,26 +211,6 @@ header {
         @include baseWidth;
         margin: 10px 0;
         border: 1px solid $gray-divider-light;
-    }
-
-    nav {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        @include baseWidth;
-
-        ul {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-direction: row;
-
-            li {
-                list-style: none;
-                font-size: 1em;
-            }
-        }
     }
 }
 </style>

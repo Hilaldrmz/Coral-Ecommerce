@@ -1,9 +1,9 @@
 <template>
+    <Hero label="All Products" text="Discover our latest collections and<br/>
+    find your style among our wide range of products." :img="'hero-img-2.png'"/>
+    
     <div class="products-view">
-        <!-- <section class="aside">
-            <hr>
-            <h1>fiters</h1>
-        </section> -->
+
         <section class="products-section">
             <div class="products">
                 <div class="navigation">
@@ -45,6 +45,7 @@
 import { ref } from "vue";
 import data from "../data/data.json";
 import { useRouter } from "vue-router";
+import Hero from "@/components/Hero.vue";
 
 const router = useRouter();
 
@@ -71,33 +72,12 @@ const navigateToProduct = (productId) => {
     justify-content: center;
     align-items: center;
 
-
-    .aside {
-        display: flex;
-        flex-direction: column;
-        justify-content: start;
-        align-items: center;
-        position: fixed;
-        left: 0;
-        background: $white-soft;
-        padding: 90px;
-        height: 100dvh;
-        width: 15vw;
-        z-index: -2;
-
-        hr{
-            width: 100%;
-            border: 1px solid $gray-divider-light;
-        }
-    }
-
     .products-section {
         @include baseMargin;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        overflow: hidden;
 
         .text {
 

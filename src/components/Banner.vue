@@ -6,13 +6,14 @@
                 wear collection exclusively offered at the <br>
                 reopened Giorgio Armani boutique <br>
                 in Los Angeles.</p>
-            <button>See Collection</button>
+
+            <Button label="See Collection"/>
         </div>
     </div>
 </template>
 
 <script setup>
-
+import Button from './common/Buttons.vue';
 </script>
 
 <style lang="scss" scoped>
@@ -36,8 +37,6 @@
         align-items: start;
         justify-content: center;
 
-        // .logo {}
-
         p {
             max-width: 504px;
             color: white;
@@ -50,6 +49,7 @@
         button {
             max-width: 200px;
             max-height: 50px;
+            padding: 10px;
             background-color: $white-soft;
             color: $black-soft;
             font-size: 20px;

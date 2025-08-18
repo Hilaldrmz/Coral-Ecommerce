@@ -1,23 +1,21 @@
 <template>
-<Hero />
-<Brands />
-<Explore />
-<Products />
-<Banner />
-<BestSellers message="Or Subscribe To The Newsletter" />
-<Instagram />
+    <Hero label="Collections" text="You can explore ans shop many different collection<br>
+    from various barands here." :button="true" :img="'hero-img.png'"/>
+    <Brands />
+    <Explore :title="'Explore new and popular styles'" />
+    <Products :isOnlyBestSeller="false" />
+    <Banner />
+    <Products :isOnlyBestSeller="true" />
+    <Instagram />
 </template>
 
 <script setup>
 import Hero from "../components/Hero.vue";
 import Brands from "../components/Brands.vue";
-import Explore from "../components/Explore.vue";
+import Explore from "../components/CollectionsShowcase.vue";
 import Products from "../components/Products.vue";
 import Banner from "../components/Banner.vue";
-import BestSellers from "../components/BestSellers.vue";
-import Instagram from "../components/Instagram.vue";
+import Instagram from "../components/SocialSection.vue";
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

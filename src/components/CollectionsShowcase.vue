@@ -1,28 +1,34 @@
 <template>
-    <div class="explore-section">
-
-        <div class="collections">
-            <div class="text">
-                <span>Explore new and popular styles</span>
+    <div class="collections-wrapper">
+        <div class="collections-list">
+            <div class="collections-title">
+                <span>{{ title }}</span>
             </div>
-            <div v-if="collections.length > 0" class="collection single">
-                <img :src="getImagePath(collections[0].image)" alt="" class="big" />
+            <div v-if="collections.length > 0" class="collection-main">
+                <img :src="getImagePath(collections[0].image)" alt="" class="main-image" />
             </div>
-            <div class="multi-collection-section">
+            <div class="collections-grid">
                 <template v-for="(item, index) in collections">
-                    <div v-if="index !== 0" :key="item.id" class="collection multi">
-                        <img :src="getImagePath(item.image)" alt="" class="small" />
+                    <div v-if="index !== 0" :key="item.id" class="collection-item">
+                        <img :src="getImagePath(item.image)" alt="" class="item-image" />
                     </div>
                 </template>
             </div>
         </div>
-
     </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
 import data from "../data/data.json";
+
+const props = defineProps({
+    title: {
+        type: String,
+        required: false,
+    }
+})
+
 
 function getImagePath(imagePath) {
     const baseURL = import.meta.env.BASE_URL;
@@ -45,7 +51,7 @@ onMounted(() => {
 
 
 <style lang="scss" scoped>
-.explore-section {
+.collections-wrapper {
     @include baseMargin;
     display: flex;
     flex-wrap: nowrap;
@@ -60,7 +66,7 @@ onMounted(() => {
         transform: scale(0.8);
     }
 
-    .collections {
+    .collections-list {
         @include baseWidth;
         display: flex;
         flex-direction: row;
@@ -69,7 +75,7 @@ onMounted(() => {
         align-items: center;
         gap: 10px;
 
-        .text {
+        .collections-title {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -83,6 +89,7 @@ onMounted(() => {
                 justify-content: center;
                 transform: rotate(-90deg);
                 font-size: 34px;
+                font-weight: 500;
                 white-space: nowrap;
                 line-height: normal;
                 text-align: center;
@@ -90,24 +97,24 @@ onMounted(() => {
             }
         }
 
-        .single {
+        .collection-main {
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            cursor: pointer;
+            // cursor: pointer;
             flex-wrap: nowrap;
 
-            .big {
+            .main-image {
                 width: 614px;
                 object-fit: cover;
                 border-radius: 0.25rem;
             }
         }
 
-        .multi-collection-section {
+        .collections-grid {
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
@@ -117,7 +124,7 @@ onMounted(() => {
             gap: 20px;
             gap: 10px;
 
-            .multi {
+            .collection-item {
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -125,10 +132,10 @@ onMounted(() => {
                 padding: 0;
                 height: 340px;
                 overflow: hidden;
-                cursor: pointer;
-                flex: 1 1 calc(50% - 10px); // İki kolona böl
+                // cursor: pointer;
+                flex: 1 1 calc(50% - 10px); /// İki kolona böl
 
-                .small {
+                .item-image {
                     width: 340px;
                     margin: 0;
                     padding: 0;

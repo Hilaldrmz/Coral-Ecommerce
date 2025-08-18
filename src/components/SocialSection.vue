@@ -1,21 +1,26 @@
 <template>
-    <section class="instagram-section">
+    <section class="social-section">
         <p>Follow Products And Discounts On Instagram</p>
 
-        <div class="posts">
-            <div v-for="post in instagram" :key="post.id" class="post">
+        <div class="instagram-posts">
+            <div v-for="post in instagram" :key="post.id" class="instagram-post">
                 <img :src="getImagePath(post.image)" alt="">
             </div>
         </div>
 
         <p>Or Subscribe To The Newsletter</p>
 
-        <form action="" class="submit-form">
-            <label for="email" class="email-label">
+        <form @submit.prevent="handleSubmit" class="newsletter-form">
+            <label for="email" class="newsletter-email-label">
                 <input name="email" id="email" type="email" placeholder="Email" required />
             </label>
-                <input type="submit" value="Submit" id="submit-btn" />
+            <input type="submit" value="Submit" id="newsletter-submit-btn" />
         </form>
+
+        <dialog ref="dialogRef">
+            <p>Thank you for subscribing!</p>
+            <button @click="closeDialog">Close</button>
+        </dialog>
     </section>
 </template>
 
@@ -24,20 +29,29 @@ import { ref } from "vue";
 import data from "../data/data.json";
 
 const instagram = ref(data.instagram);
+const dialogRef = ref(null);
 
 function getImagePath(imagePath) {
     const baseURL = import.meta.env.BASE_URL;
-    
+
     if (import.meta.env.PROD !== true) {
         return imagePath;
     } else {
         return baseURL + imagePath;
     }
 }
+
+function handleSubmit() {
+    dialogRef.value.showModal();
+}
+
+function closeDialog() {
+    dialogRef.value.close();
+}
 </script>
 
 <style lang="scss" scoped>
-.instagram-section {
+.social-section {
     // @include baseMargin;
     display: flex;
     flex-direction: column;
@@ -48,19 +62,19 @@ function getImagePath(imagePath) {
     width: 100%;
     transition: all 0.5s ease;
 
-@media screen and (max-width: 1840px) {
-    transform: scale(0.8);
-    width: 130%;
-}
+    @media screen and (max-width: 1840px) {
+        transform: scale(0.8);
+        width: 130%;
+    }
 
-    .posts {
+    .instagram-posts {
         @include baseWidth;
         display: flex;
         justify-content: center;
         align-items: center;
         gap: 20px;
 
-        .post {
+        .instagram-post {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -92,18 +106,18 @@ function getImagePath(imagePath) {
     }
 
     p {
-        font-size: 50px;
+        font-size: 34px;
         font-weight: 500;
         white-space: nowrap;
     }
 
-    .submit-form {
+    .newsletter-form {
         display: flex;
         justify-content: center;
         align-items: center;
         gap: 20px;
 
-        .email-label {
+        .newsletter-email-label {
             #email {
                 width: 643px;
                 height: 32px;
@@ -117,14 +131,14 @@ function getImagePath(imagePath) {
             }
         }
 
-            #submit-btn {
-                width: 91px;
-                height: 32px;
-                background: transparent;
-                border: none;
-                border-bottom: $black-muted 1px solid;
-                cursor: pointer;
-            }
+        #newsletter-submit-btn {
+            width: 91px;
+            height: 32px;
+            background: transparent;
+            border: none;
+            border-bottom: $black-muted 1px solid;
+            cursor: pointer;
+        }
 
     }
 }

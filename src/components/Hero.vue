@@ -2,18 +2,15 @@
     <div class="hero">
         <div class="container">
             <div class="content">
-                <h1>Collections</h1>
-                <p>You can explore ans shop many different collection<br>
-                    from various barands here.</p>
-                <Router-link to="/products">
-                    <button>
-                        <font-awesome-icon icon="bag-shopping" />
-                        Shop Now
-                    </button>
+                <h1 class="title">{{ label }}</h1>
+                <p class="text" v-html="text"></p>
+                <Router-link to="/products" v-if="button === true">
+                    <Button :label="'Shop Now'" :icon="'bag-shopping'">
+                    </Button>
                 </Router-link>
             </div>
-            <div class="img-section">
-                <img src="../assets/hero-img.png" alt="">
+            <div class="img-section" v-if="img !== null">
+                <img :src="`/src/assets/${img}`" alt="">
                 <div class="rectangle"></div>
             </div>
         </div>
@@ -21,8 +18,28 @@
 </template>
 
 <script setup>
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import Button from './common/Buttons.vue';
 
+const props = defineProps({
+    label: {
+        type: String,
+        required: true,
+    },
+    text: {
+        type: String,
+        required: false,
+    },
+    button: {
+        type: Boolean,
+        required: false,
+        default: false,
+    },
+    img: {
+        type: String,
+        required: false,
+        default: null,
+    }
+})
 
 </script>
 
