@@ -11,22 +11,22 @@
         </div>
         <div class="text">
             <p>
-                Oops! It looks like you're lost. <br />
-                Sorry about that. <br />
-                Let me try and help. <br />
-                Go back <a href='/'>home</a> and start over.
-                </p>
+                {{ $t('404_oops') }} <br />
+                {{ $t('404_sorry') }} <br />
+                {{ $t('404_help') }} <br />
+                {{ $t('go_back_home') }}
+            </p>
         </div>
     </div>
 </template>
 
 <style scoped>
-
 a {
     color: #fdbc40;
     text-decoration: none;
     border-bottom: solid 2px;
 }
+
 .text p {
     color: white;
 }
@@ -81,5 +81,4 @@ a {
         background: #34c84a;
     }
 }
-
 </style>

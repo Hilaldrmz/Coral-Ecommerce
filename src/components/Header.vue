@@ -5,18 +5,19 @@
                 <Logo class="logo"></Logo>
             </RouterLink>
             <div class="user">
+                <LocaleSelect />
                 <font-awesome-icon icon="user" @mouseover="showDropdown('user')" />
                 <div class="dropdown" v-if="activeDropdown === 'user'" ref="userDropdown" @mouseleave="hideDropdown()">
                     <ul>
                         <RouterLink to="/orders">
-                            <li>My Orders</li>
+                            <li>{{ $t('my_orders') }}</li>
                         </RouterLink>
                         <hr>
-                        <li>User Preferences</li>
+                        <li>{{ $t('user_preferences') }}</li>
                         <hr>
-                        <li>Notifications</li>
+                        <li>{{ $t('notifications') }}</li>
                         <hr>
-                        <li>Sing out</li>
+                        <li>{{ $t('sign_out') }}</li>
                     </ul>
                 </div>
 
@@ -39,6 +40,7 @@ import { useCartStore } from '../stores/cart';
 import { RouterLink } from "vue-router";
 import Logo from '../components/Logo.vue'
 import CartDropdown from '../components/CartDropdown.vue'
+import LocaleSelect from './LocaleSelect.vue';
 
 const cartStore = useCartStore();
 const cartItemCount = computed(() => cartStore.cartItemCount)

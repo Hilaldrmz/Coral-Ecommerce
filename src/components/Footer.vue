@@ -16,33 +16,33 @@
                 </div>
             </div>
             <div class="footer-section">
-                <h3>Products</h3>
+                <h3>{{ $t('products') }}</h3>
                 <ul>
-                    <li>Necklaces</li>
-                    <li>Hoodies</li>
-                    <li>Jewelry Box</li>
-                    <li>T-Shirt</li>
-                    <li>Jacket</li>
+                    <li>{{ $t('necklaces') }}</li>
+                    <li>{{ $t('hoodies') }}</li>
+                    <li>{{ $t('jewelry_box') }}</li>
+                    <li>{{ $t('tshirt') }}</li>
+                    <li>{{ $t('jacket') }}</li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h3>Company</h3>
+                <h3>{{ $t('company') }}</h3>
                 <ul>
-                    <li>Our Producers</li>
-                    <li>Sitemap</li>
-                    <li>FAQ</li>
-                    <li>About Us</li>
-                    <li>Terms & Conditions</li>
+                    <li>{{ $t('our_producers') }}</li>
+                    <li>{{ $t('sitemap') }}</li>
+                    <li>{{ $t('faq') }}</li>
+                    <li>{{ $t('about_us') }}</li>
+                    <li>{{ $t('terms_conditions') }}</li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h3>Customer Service</h3>
+                <h3>{{ $t('customer_service') }}</h3>
                 <ul>
-                    <li>Contact Us</li>
-                    <li>Track Your Order</li>
-                    <li>Product Care & Repair</li>
-                    <li>Book An Appointment</li>
-                    <li>Shipping & Returns</li>
+                    <li>{{ $t('contact_us') }}</li>
+                    <li>{{ $t('track_your_order') }}</li>
+                    <li>{{ $t('product_care_repair') }}</li>
+                    <li>{{ $t('book_appointment') }}</li>
+                    <li>{{ $t('shipping_returns') }}</li>
                 </ul>
             </div>
         </div>

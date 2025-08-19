@@ -6,25 +6,23 @@
             <ul class="checkout-steps">
                 <li class="step" v-bind:class="{ 'active': activeTab === 'cart' }">
                     <div class="step-number">1</div>
-                    <div class="step-label">Cart</div>
+                    <div class="step-label">{{ $t('cart') }}</div>
                 </li>
                 <li class="step" v-bind:class="{ 'active': activeTab === 'payment' }">
                     <div class="step-number">2</div>
-                    <div class="step-label
-                ">Shipping & Payment</div>
+                    <div class="step-label">{{ $t('shipping') }} & {{ $t('payment_method') }}</div>
                 </li>
                 <li class="step" v-bind:class="{ 'active': activeTab === 'result' }">
                     <div class="step-number">3</div>
-                    <div class="step-label
-                ">Order Complete</div>
+                    <div class="step-label">{{ $t('orders') }} {{ $t('order_success') }}</div>
                 </li>
             </ul>
         </div>
         <div class="step cart" v-if="activeTab === 'cart'">
             <div class="if-cart-empty" v-if="cartItems.length === 0">
-                <h2>Your cart is empty</h2>
+                <h2>{{ $t('your_cart_is_empty') }}</h2>
                 <RouterLink to="/products">
-                    <button class="start-shopping">Start Shopping</button>
+                    <button class="start-shopping">{{ $t('start_shopping') }}</button>
                 </RouterLink>
             </div>
             <div class="cart-row" v-else>
@@ -40,8 +38,8 @@
                                 <div class="item-name">{{ cartItem.name }}</div>
                             </RouterLink>
                             <div>
-                                <div class="item-size">Size: {{ cartItem.size }}</div>
-                                <div class="item-color">Color:
+                                <div class="item-size">{{ $t('size') }} {{ cartItem.size }}</div>
+                                <div class="item-color">{{ $t('color') }}
                                     <button :style="{ backgroundColor: cartItem.color }" />
                                 </div>
                             </div>
@@ -52,7 +50,7 @@
                     <div class="item-quantity">
                         <button class="quantity-btn" :disabled="cartItem.quantity == 1"
                             @click="updateQuantity(cartItem.id, cartItem.color, cartItem.size, cartItem.quantity - 1)">-</button>
-                        <span class="quantity">{{ cartItem.quantity }}</span>
+                        <span class="quantity">{{ $t('quantity') }} {{ cartItem.quantity }}</span>
                         <button class="quantity-btn"
                             @click="updateQuantity(cartItem.id, cartItem.color, cartItem.size, cartItem.quantity + 1)">+</button>
                     </div>
@@ -70,15 +68,15 @@
 
             <div class="summary zig-zag-top">
                 <div class="summary-head">
-                    <button class="add-gift-card-btn">Add Gift Card or enter a promotion code</button>
+                    <button class="add-gift-card-btn">{{ $t('add_gift_card') }}</button>
                 </div>
                 <div class="summary-bottom">
                     <div class="summary-total">
-                        <p class="total-label">Total</p>
+                        <p class="total-label">{{ $t('total') }}</p>
                         <p class="total-price">${{ subtotal }}</p>
                     </div>
                     <input class="checkout-btn" @click="activeTab = 'payment'" :disabled="cartItems.length === 0"
-                        value="Checkout" type="submit" />
+                        :value="$t('checkout')" type="submit" />
                 </div>
             </div>
         </div>
@@ -86,7 +84,7 @@
         <div class="step payment" v-if="activeTab === 'payment'">
             <div class="shipping-form">
                 <div class="delivery-address">
-                    <h3 class="delivery-address-label">Delivery Address</h3>
+                    <h3 class="delivery-address-label">{{ $t('delivery_address') }}</h3>
                     <input type="text" id="name" name="name" placeholder="name" />
                     <input type="text" id="surname" name="surname" placeholder="surname" />
                     <input type="text" id="phone" name="phone" placeholder="phone" />
@@ -97,38 +95,37 @@
                     <input type="text" id="zip" name="zip" placeholder="zip" />
                 </div>
                 <div class="delivery-options">
-                    <h3 class="delivery-options-label">Delivery Options</h3>
+                    <h3 class="delivery-options-label">{{ $t('delivery_options') }}</h3>
                     <div class="delivery-option">
                         <label for="standard">
                             <input type="radio" id="standard" name="delivery" value="standard" />
-                            Standard Delivery
+                            {{ $t('standard_delivery') }}
                         </label>
-                        <p class="shipping-day">Estimated delivery 2-3 days</p>
-                        <p class="shipping-price">free of charge</p>
+                        <p class="shipping-day">{{ $t('estimated_delivery') }}</p>
+                        <p class="shipping-price">{{ $t('free_of_charge') }}</p>
                     </div>
                     <div class="delivery-option">
                         <label for="express">
                             <input type="radio" id="express" name="delivery" value="express" />
-                            Express Delivery</label>
-                        <p class="shipping-day">Same day delivery for orders placed before
-                            12:00</p>
-                        <p class="shipping-price">$10.00</p>
+                            {{ $t('express_delivery') }}</label>
+                        <p class="shipping-day">{{ $t('same_day_delivery') }}</p>
+                        <p class="shipping-price">$10.00</p> <!-- Fiyat sabit, isterseniz anahtar ekleyin -->
                     </div>
                 </div>
                 <div class="payment-method">
-                    <h3 class="payment-method-label">Payment Method</h3>
+                    <h3 class="payment-method-label">{{ $t('payment_method') }}</h3>
                     <div class="payment-method-options">
                         <div class="payment-option">
                             <label for="credit-card">
                                 <input type="radio" id="credit-card" name="payment" value="credit-card" />
-                                Credit Card
+                                {{ $t('credit_card') }}
                             </label>
                         </div>
                         <div class="payment-option">
 
                             <label for="paypal">
                                 <input type="radio" id="paypal" name="payment" value="paypal" />
-                                Paypal
+                                {{ $t('paypal') }}
                             </label>
                         </div>
                     </div>
@@ -137,18 +134,18 @@
 
                     <label for="terms">
                         <input type="checkbox" id="terms" name="terms" required />
-                        I accept the <a href="">terms and conditions</a>
+                        {{ $t('terms_and_conditions') }}
                     </label>
                 </div>
             </div>
             <div class="summary zig-zag-top">
                 <div class="summary-head">
                     <div class="subtotal">
-                        <p class="subtotal-label">Subtotal</p>
+                        <p class="subtotal-label">{{ $t('subtotal') }}</p>
                         <p class="subtotal-price">${{ subtotal }}</p>
                     </div>
                     <div class="shipping">
-                        <p class="shipping-label">Shipping</p>
+                        <p class="shipping-label">{{ $t('shipping') }}</p>
                         <p class="shipping-price">${{ shipping }}</p>
                     </div>
                 </div>
@@ -157,12 +154,12 @@
                         <p class="total-label">Total</p>
                         <p class="total-price">${{ totalPrice }}</p>
                     </div>
-                    <input class="checkout-btn" @click="checkout" value="Checkout" type="submit" />
+                    <input class="checkout-btn" @click="checkout" :value="$t('checkout')" type="submit" />
                     <div class="secure-shop">
                         <font-awesome-icon icon="lock" />
                         <div class="wrap">
-                            <h4>Safe Shopping</h4>
-                            <p>Your purchases at Coral.com are protected by an SSL security certificate.</p>
+                            <h4>{{ $t('safe_shopping') }}</h4>
+                            <p>{{ $t('ssl_protected') }}</p>
                         </div>
                     </div>
                 </div>
@@ -173,23 +170,23 @@
             <div class="order-complete">
                 <div class="order-complete-message">
                     <font-awesome-icon icon="check-circle" class="check-circle" />
-                    <span>Your order has been placed successfully</span>
+                    <span>{{ $t('order_success') }}</span>
                 </div>
                 <div class="order-details">
                     <div class="order-number">
-                        <span>Order Number:</span>
+                        <span>{{ $t('order_number') }}</span>
                         <span>{{ rondomOrderNum }}</span>
                     </div>
                     <div class="order-date">
-                        <span>Order Date:</span>
+                        <span>{{ $t('order_date') }}</span>
                         <span>{{ orderDate }}</span>
                     </div>
                     <div class="buttons">
                         <RouterLink to="/products">
-                            <button class="button home">Continue Shopping</button>
+                            <button class="button home">{{ $t('continue_shopping') }}</button>
                         </RouterLink>
                         <RouterLink to="/orders">
-                            <button class="button orders">See Orders</button>
+                            <button class="button orders">{{ $t('see_orders') }}</button>
                         </RouterLink>
                     </div>
                     <div class="order-row">
@@ -205,8 +202,8 @@
                                         <div class="item-name">{{ cartItem.name }}</div>
                                     </RouterLink>
                                     <div>
-                                        <div class="item-size">Size: {{ cartItem.size }}</div>
-                                        <div class="item-color">Color:
+                                        <div class="item-size">{{ $t('size') }} {{ cartItem.size }}</div>
+                                        <div class="item-color">{{ $t('color') }}
                                             <button :style="{ backgroundColor: cartItem.color }" />
                                         </div>
                                     </div>
@@ -660,10 +657,10 @@ const checkout = () => {
                     flex-direction: row;
                     justify-content: center;
                     align-items: center;
-                    
-                    input{
+
+                    input {
                         margin-right: 10px;
-                        
+
                     }
 
                     a {

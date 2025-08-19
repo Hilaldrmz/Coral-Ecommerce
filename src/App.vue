@@ -4,7 +4,7 @@ import './scss/main.css';
 
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
-import ThemeToggle from "./components/ThemeToggle.vue";
+// import ThemeToggle from "./components/ThemeToggle.vue";
 </script>
 
 <template>

@@ -1,26 +1,26 @@
 <template>
-    <Hero label="All Products" text="Discover our latest collections and<br/>
-    find your style among our wide range of products." :img="'hero-img-2.png'"/>
-    
+    <Hero :label="$t('all_products')" :text="$t('hero_products_text')" :img="'hero-img-2.png'" />
+
     <div class="products-view">
 
         <section class="products-section">
             <div class="products">
                 <div class="navigation">
                     <ul>
-                        <li><a href="">All Products</a></li>
-                        <li><a href="">T-Shirt</a></li>
-                        <li><a href="">Hoodies</a></li>
-                        <li><a href="">Jacket</a></li>
+                        <li><a href="">{{ $t('all_products') }}</a></li>
+                        <li><a href="">{{ $t('tshirt') }}</a></li>
+                        <li><a href="">{{ $t('hoodies') }}</a></li>
+                        <li><a href="">{{ $t('jacket') }}</a></li>
                     </ul>
 
                     <button class="filter">
                         <font-awesome-icon icon="filter" />
-                        Filter
+                        {{ $t('search') }}
                     </button>
                 </div>
 
-                <div class="product" v-for="product in products" :key="product.id" @click="navigateToProduct(product.id)">
+                <div class="product" v-for="product in products" :key="product.id"
+                    @click="navigateToProduct(product.id)">
                     <div class="badge-wrapper">
                         <span class="badge" :class="product.badge">{{ product.badge }}</span>
                     </div>
@@ -29,8 +29,8 @@
                         <h3>{{ product.name }}</h3>
                         <div class="price-wrap">
                             <p class="price orj-price" :class="{ 'discount-applied': product.discount > 0 }"> {{
-                    product.price
-                }}</p>
+                                product.price
+                                }}</p>
                             <p class="price discounted-price" v-if="product.price !== discountedPrice(product)">{{
                                 discountedPrice(product) }}</p>
                         </div>

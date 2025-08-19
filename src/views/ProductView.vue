@@ -2,6 +2,7 @@
     <section class="product-section" v-if="selectedProduct">
         <button class="back" @click="navigateToBack()">
             <font-awesome-icon icon="fa-solid fa-chevron-left" />
+            {{ $t('go_back') }}
         </button>
 
         <div class="product">
@@ -16,7 +17,7 @@
 
                     <div class="other-details">
                         <div class="sizes" v-if="selectedProduct.sizes && selectedProduct.sizes.length > 0">
-                            <label>Select Size</label>
+                            <label>{{ $t('select_size') }}</label>
                             <div class="size-options">
                                 <button v-for="size in selectedProduct.sizes" :key="size"
                                     :class="{ active: size === selectedSize }" @click="selectedSize = size">
@@ -26,7 +27,7 @@
                         </div>
 
                         <div class="color-section" v-if="selectedProduct.colors && selectedProduct.colors.length > 0">
-                            <label>Select Color</label>
+                            <label>{{ $t('select_color') }}</label>
                             <div class="color-options">
                                 <button v-for="color in selectedProduct.colors" :key="color"
                                     :class="{ active: color === selectedColor }" @click="selectedColor = color"
@@ -37,10 +38,11 @@
                     </div>
                 </div>
                 <div class="comments-section">
-                    <h3>User Comments</h3>
+                    <h3>{{ $t('user_comments') }}</h3>
                     <ul>
                         <li v-for="comment in comments" :key="comment.id">
-                            <strong>{{ comment.username }}</strong> - <span>{{ comment.rating }} stars</span>
+                            <strong>{{ comment.username }}</strong> - <span>{{ comment.rating }} {{ $t('stars')
+                                }}</span>
                             <p>{{ comment.comment }}</p>
                         </li>
                     </ul>
@@ -55,12 +57,13 @@
                                 discountedPrice(selectedProduct) }}</p>
                     </div>
                     <Button :class="'add-to-bag'" :success="isAddedToCart"
-                        :label="isAddedToCart ? 'Added' : 'Add to Bag'" :icon="'bag-shopping'" @click="addToCart" />
+                        :label="isAddedToCart ? 'added' : $t('add_to_bag')" :icon="'bag-shopping'"
+                        @click="addToCart" />
                 </div>
             </div>
         </div>
     </section>
-    <Products message="You Might Also Like" class="also-like" />
+    <Products :message="$t('you_might_also_like')" class="also-like" />
 </template>
 
 <script setup>

@@ -1,6 +1,6 @@
 <template>
     <section class="social-section">
-        <p>Follow Products And Discounts On Instagram</p>
+        <p>{{ $t('follow_instagram') }}</p>
 
         <div class="instagram-posts">
             <div v-for="post in instagram" :key="post.id" class="instagram-post">
@@ -8,7 +8,7 @@
             </div>
         </div>
 
-        <p>Or Subscribe To The Newsletter</p>
+        <p>{{ $t('subscribe_newsletter') }}</p>
 
         <form @submit.prevent="handleSubmit" class="newsletter-form">
             <label for="email" class="newsletter-email-label">
@@ -18,8 +18,8 @@
         </form>
 
         <dialog ref="dialogRef">
-            <p>Thank you for subscribing!</p>
-            <button @click="closeDialog">Close</button>
+            <p>{{ $t('thank_you_subscribing') }}</p>
+            <button @click="closeDialog">{{ $t('close') }}</button>
         </dialog>
     </section>
 </template>

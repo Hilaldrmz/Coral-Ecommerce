@@ -1,6 +1,6 @@
 <template>
     <ProductCard filtersBar="true"
-        :message="isOnlyBestSeller ? 'Best Sellers' : 'Or find something you love among our products'"
+        :message="isOnlyBestSeller ? 'Best Sellers' : $t('find_something_you_love')"
         :onlyBestSeller="isOnlyBestSeller" />
 </template>
 

@@ -1,7 +1,7 @@
 <template>
     <button>
         <font-awesome-icon icon="bag-shopping" />
-        Shop Now
+        {{ $t('shop_now') }}
     </button>
 </template>
 

@@ -2,12 +2,9 @@
     <div class="banner-section">
         <div class="discription">
             <img src="../assets/banner/Zara-Logo.png" alt="" class="logo">
-            <p>Lustrous yet understated. The new evening <br>
-                wear collection exclusively offered at the <br>
-                reopened Giorgio Armani boutique <br>
-                in Los Angeles.</p>
+            <p>{{ $t('banner_description') }}</p>
 
-            <Button label="See Collection"/>
+            <Button :label="$t('see_collection')" />
         </div>
     </div>
 </template>

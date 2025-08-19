@@ -1,19 +1,19 @@
 <template>
     <div class="is-that-empty" v-if="orders.length === 0">
-        <p>No orders yet.</p>
+        <p>{{ $t('no_orders_yet') }}</p>
     </div>
 
     <section class="orders" v-else>
         <div class="order-row" v-for="order in orders" :key="order.orderNumber">
             <div class="order-details">
                 <div class="order-date">
-                    Order Date: <span>{{ order.orderDate }}</span>
+                    {{ $t('order_date') }} <span>{{ order.orderDate }}</span>
                 </div>
                 <div class="order-number">
-                    Order Number: <span>{{ order.orderNumber }}</span>
+                    {{ $t('order_number') }} <span>{{ order.orderNumber }}</span>
                 </div>
                 <div class="order-total">
-                    Order Total: <span class="colored">$ {{ order.totalPrice }}</span>
+                    {{ $t('order_total') }} <span class="colored">$ {{ order.totalPrice }}</span>
                 </div>
             </div>
             <div class="order-item" v-for="cartItem in order.cartItems" :key="cartItem.id">
@@ -28,7 +28,7 @@
                             <div class="item-name">{{ cartItem.name }}</div>
                         </RouterLink>
                         <div>
-                            <div class="item-size">Size: {{ cartItem.size }}</div>
+                            <div class="item-size">{{ $t('size') }} {{ cartItem.size }}</div>
                             <div class="item-color">Color:
                                 <button :style="{ backgroundColor: cartItem.color }" />
                             </div>
@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="item-quantity">
-                    <span class="quantity">{{ cartItem.quantity }}</span>
+                    <span class="quantity">{{ $t('quantity') }} {{ cartItem.quantity }}</span>
                 </div>
                 <div class="right-side-wrap">
                     <div class="item-price">$ {{ cartItem.price * cartItem.quantity }}</div>
