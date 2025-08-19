@@ -10,7 +10,7 @@
                 </Router-link>
             </div>
             <div class="img-section" v-if="img !== null">
-                <img :src="`/img/${img}`" alt="">
+                <img v-if="img" :src="`/img/${img}`" :alt="img">
                 <div class="rectangle"></div>
             </div>
         </div>
