@@ -10,7 +10,7 @@
                 </Router-link>
             </div>
             <div class="img-section" v-if="img !== null">
-                <img v-if="img" :src="`/img/${img}`" :alt="img">
+                <img v-if="img" :src="`${baseUrl}img/${img}`" :alt="img">
                 <div class="rectangle"></div>
             </div>
         </div>
@@ -40,6 +40,8 @@ const props = defineProps({
         default: null,
     }
 })
+
+const baseUrl = import.meta.env.BASE_URL;
 
 </script>
 
