@@ -10,7 +10,7 @@
                 </Router-link>
             </div>
             <div class="img-section" v-if="img !== null">
-                <img :src="`/src/assets/${img}`" alt="">
+                <img :src="`/img/${img}`" alt="">
                 <div class="rectangle"></div>
             </div>
         </div>
@@ -116,7 +116,7 @@ const props = defineProps({
                 height: 542px;
                 flex-grow: 0;
                 margin: 0 18px 20px 0;
-                object-fit: contain;
+                object-fit: cover;
             }
 
             .rectangle {
